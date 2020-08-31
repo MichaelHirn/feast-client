@@ -1,0 +1,33 @@
+name: Semantic Release
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # this is necessary for @semantic-release/git to work with
+          # protected branches. See here for more:
+          # https://github.com/semantic-release/git/issues/196
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Semantic Release
+        run: npm run semantic-release:ci
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
