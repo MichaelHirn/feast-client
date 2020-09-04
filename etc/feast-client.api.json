@@ -16,104 +16,334 @@
       "name": "",
       "members": [
         {
-          "kind": "Class",
-          "canonicalReference": "feast-client!Test:class",
-          "docComment": "",
+          "kind": "Enum",
+          "canonicalReference": "feast-client!ValueType:enum",
+          "docComment": "/**\n * Feature and Entity value type. Used to define data types in Feature Sets.\n *\n * @remarks\n *\n * To learn more: https://github.com/feast-dev/feast/blob/master/sdk/python/feast/value_type.py\n *\n * @public\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export declare class Test "
+              "text": "export declare enum ValueType "
             }
           ],
           "releaseTag": "Public",
-          "name": "Test",
+          "name": "ValueType",
           "members": [
             {
-              "kind": "Constructor",
-              "canonicalReference": "feast-client!Test:constructor(1)",
-              "docComment": "/**\n * Constructs a new instance of the `Test` class\n */\n",
-              "excerptTokens": [
-                {
-                  "kind": "Content",
-                  "text": "constructor(name: "
-                },
-                {
-                  "kind": "Content",
-                  "text": "any"
-                },
-                {
-                  "kind": "Content",
-                  "text": ");"
-                }
-              ],
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [
-                {
-                  "parameterName": "name",
-                  "parameterTypeTokenRange": {
-                    "startIndex": 1,
-                    "endIndex": 2
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "Method",
-              "canonicalReference": "feast-client!Test#hello:member(1)",
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.BOOL:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "hello(): "
+                  "text": "BOOL = "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
+                  "text": "7"
                 }
               ],
-              "isStatic": false,
-              "returnTypeTokenRange": {
+              "releaseTag": "Public",
+              "name": "BOOL",
+              "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              },
-              "releaseTag": "Public",
-              "overloadIndex": 1,
-              "parameters": [],
-              "name": "hello"
+              }
             },
             {
-              "kind": "Property",
-              "canonicalReference": "feast-client!Test#name:member",
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.BOOL_LIST:member",
               "docComment": "",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "name: "
+                  "text": "BOOL_LIST = "
                 },
                 {
                   "kind": "Content",
-                  "text": "string"
-                },
-                {
-                  "kind": "Content",
-                  "text": ";"
+                  "text": "17"
                 }
               ],
               "releaseTag": "Public",
-              "name": "name",
-              "propertyTypeTokenRange": {
+              "name": "BOOL_LIST",
+              "initializerTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2
-              },
-              "isStatic": false
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.BYTES:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BYTES = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "1"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "BYTES",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.BYTES_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "BYTES_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "11"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "BYTES_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.DOUBLE:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DOUBLE = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "5"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "DOUBLE",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.DOUBLE_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "DOUBLE_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "15"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "DOUBLE_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.FLOAT:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FLOAT = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "6"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "FLOAT",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.FLOAT_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "FLOAT_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "16"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "FLOAT_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.INT32:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INT32 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "3"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "INT32",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.INT32_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INT32_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "13"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "INT32_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.INT64:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INT64 = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "4"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "INT64",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.INT64_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "INT64_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "14"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "INT64_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.STRING:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STRING = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "2"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "STRING",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.STRING_LIST:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "STRING_LIST = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "12"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "STRING_LIST",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "EnumMember",
+              "canonicalReference": "feast-client!ValueType.UNKNOWN:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "UNKNOWN = "
+                },
+                {
+                  "kind": "Content",
+                  "text": "0"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "UNKNOWN",
+              "initializerTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
             }
-          ],
-          "implementsTokenRanges": []
+          ]
         }
       ]
     }

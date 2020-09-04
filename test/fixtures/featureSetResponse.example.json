@@ -1,0 +1,30 @@
+{
+  "spec": {
+    "name": "testSet",
+    "entities": [
+      {
+        "name": "customerId"
+      }
+    ],
+    "maxAge": {},
+    "source": {
+      "type": 1,
+      "kafkaSourceConfig": {
+        "bootstrapServers": "kafka:9092,localhost:9094",
+        "topic": "feast-features"
+      }
+    },
+    "project": "test",
+    "version": 3
+  },
+  "meta": {
+    "createdTimestamp": {
+      "seconds": {
+        "low": 1599139316,
+        "high": 0,
+        "unsigned": false
+      }
+    },
+    "status": 1
+  }
+}

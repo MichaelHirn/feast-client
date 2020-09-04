@@ -21,7 +21,8 @@
       "dist/",
       "node_modules/",
       "coverage",
-      "commitlint.config.js"
+      "commitlint.config.js",
+      "**/*.js"
     ],
     "rules": {
       "tsdoc/syntax": "warn",

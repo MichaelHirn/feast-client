@@ -4,15 +4,123 @@
 
 ```ts
 
-// @public (undocumented)
-export class Test {
-    constructor(name: any);
+import * as grpc from '@grpc/grpc-js';
+
+// @alpha
+export class Client {
+    constructor(config: ClientConfig);
+    applyFeatureSet(featureSet: FeatureSet): Promise<Map<string, {
+        featureSet: FeatureSet;
+        status: ApplyFeatureSetResponseStatus;
+    }>>;
+    applyFeatureSets(featureSets: FeatureSet[]): ReturnType<Client['applyFeatureSet']>;
+    // @public
+    archiveProject(projectName: string): Promise<void>;
+    // Warning: (ae-forgotten-export) The symbol "ClientConfig" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    hello(): string;
+    readonly config: ClientConfig;
     // (undocumented)
-    name: string;
+    protected readonly coreStub: grpc.Client;
+    // @public
+    createProject(name: string): Promise<void>;
+    // Warning: (ae-incompatible-release-tags) The symbol "getFeatureSet" is marked as @beta, but its signature references "FeatureSet" which is marked as @alpha
+    //
+    // @beta
+    getFeatureSet(projectName: string, featureSetName: string): Promise<FeatureSet>;
+    listFeatures(projectName: string, entityNames: string[]): Promise<Array<{
+        feature: Feature;
+        project: string;
+        featureSet: string;
+    }>>;
+    listFeatureSets(projectName: string, featureSetName?: string): Promise<FeatureSet[]>;
+    // @public
+    listProjects(): Promise<string[]>;
+    // (undocumented)
+    protected readonly servingStub: grpc.Client;
 }
 
+// Warning: (ae-forgotten-export) The symbol "Field" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "IEntityProps" needs to be exported by the entry point index.d.ts
+//
+// @alpha
+export class Entity extends Field<IEntityProps> {
+    // (undocumented)
+    static fromConfig(name: IEntityProps['name'], valueType: IEntityProps['valueType']): Entity;
+    // (undocumented)
+    static fromFeast(object: any): Entity;
+}
+
+// Warning: (ae-forgotten-export) The symbol "IFeatureProps" needs to be exported by the entry point index.d.ts
+//
+// @alpha
+export class Feature extends Field<IFeatureProps> {
+    // (undocumented)
+    static fromConfig(name: IFeatureProps['name'], valueType: IFeatureProps['valueType'], params?: Omit<IFeatureProps, 'name' | 'valueType'>): Feature;
+    // (undocumented)
+    static fromFeast(object: any): Feature;
+}
+
+// @alpha
+export class FeatureSet {
+    // (undocumented)
+    entities(): IFeatureSetProps['spec']['entities'];
+    // (undocumented)
+    features(): IFeatureSetProps['spec']['features'];
+    // Warning: (ae-forgotten-export) The symbol "IFeatureSetConstructorParams" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    static fromConfig(name: IFeatureSetProps['spec']['name'], params: IFeatureSetConstructorParams): FeatureSet;
+    // (undocumented)
+    static fromFeast(response: any): FeatureSet;
+    // (undocumented)
+    name(): IFeatureSetProps['spec']['name'];
+    // (undocumented)
+    project(): IFeatureSetProps['spec']['project'];
+    // Warning: (ae-forgotten-export) The symbol "IFeatureSetProps" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected readonly props: IFeatureSetProps;
+}
+
+// @public
+export enum ValueType {
+    // (undocumented)
+    BOOL = 7,
+    // (undocumented)
+    BOOL_LIST = 17,
+    // (undocumented)
+    BYTES = 1,
+    // (undocumented)
+    BYTES_LIST = 11,
+    // (undocumented)
+    DOUBLE = 5,
+    // (undocumented)
+    DOUBLE_LIST = 15,
+    // (undocumented)
+    FLOAT = 6,
+    // (undocumented)
+    FLOAT_LIST = 16,
+    // (undocumented)
+    INT32 = 3,
+    // (undocumented)
+    INT32_LIST = 13,
+    // (undocumented)
+    INT64 = 4,
+    // (undocumented)
+    INT64_LIST = 14,
+    // (undocumented)
+    STRING = 2,
+    // (undocumented)
+    STRING_LIST = 12,
+    // (undocumented)
+    UNKNOWN = 0
+}
+
+
+// Warnings were encountered during analysis:
+//
+// src/client.ts:225:52 - (ae-forgotten-export) The symbol "ApplyFeatureSetResponseStatus" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

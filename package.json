@@ -5,7 +5,11 @@
   "public": true,
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "dependencies": {},
+  "dependencies": {
+    "@grpc/grpc-js": "^1.1.5",
+    "@grpc/proto-loader": "^0.5.5",
+    "fs-extra": "^9.0.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
@@ -33,7 +37,8 @@
     "test": "jest --c jest.config.json --maxWorkers=1",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm test -- --collectCoverage",
-    "build": "tsc && npm run docs",
+    "build": "tsc && npm run build:proto && npm run docs",
+    "build:proto": "cp -r ./protos dist/",
     "prepare": "npm run build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "semantic-release": "GITHUB_TOKEN=test semantic-release --no-ci --dry-run",
@@ -44,13 +49,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MichaelHirn/ts-template.git"
+    "url": "git+https://github.com/MichaelHirn/feast-client.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MichaelHirn/ts-template/issues"
+    "url": "https://github.com/MichaelHirn/feast-client/issues"
   },
-  "homepage": "https://github.com/MichaelHirn/ts-template#readme"
+  "homepage": "https://github.com/MichaelHirn/feast-client#readme"
 }
