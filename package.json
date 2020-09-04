@@ -1,6 +1,6 @@
 {
   "name": "feast-client",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "Feast Client SDK for Node.js",
   "public": true,
   "main": "dist/src/index.js",
