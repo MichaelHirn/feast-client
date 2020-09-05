@@ -51,3 +51,80 @@ export enum FeatureSetStatus {
 
   STATUS_JOB_STARTING = 3
 }
+
+export enum StoreType {
+  INVALID = 0,
+
+  // Redis stores a FeatureRow element as a key, value pair.
+  //
+  // The Redis data types used (https://redis.io/topics/data-types):
+  // - key: STRING
+  // - value: STRING
+  //
+  // Encodings:
+  // - key: byte array of RedisKey (refer to feast.storage.RedisKey)
+  // - value: byte array of FeatureRow (refer to feast.types.FeatureRow)
+  //
+  REDIS = 1,
+
+  // BigQuery stores a FeatureRow element as a row in a BigQuery table.
+  //
+  // Table name is derived is the same as the feature set name.
+  //
+  // The entities and features in a FeatureSetSpec corresponds to the
+  // fields in the BigQuery table (these make up the BigQuery schema).
+  // The name of the entity spec and feature spec corresponds to the column
+  // names, and the value_type of entity spec and feature spec corresponds
+  // to BigQuery standard SQL data type of the column.
+  //
+  // The following BigQuery fields are reserved for Feast internal use.
+  // Ingestion of entity or feature spec with names identical
+  // to the following field names will raise an exception during ingestion.
+  //
+  //   column_name       | column_data_type | description
+  // ====================|==================|================================
+  // - event_timestamp   | TIMESTAMP        | event time of the FeatureRow
+  // - created_timestamp | TIMESTAMP        | processing time of the ingestion of the FeatureRow
+  // - ingestion_id      | STRING           | unique id identifying groups of rows that have been ingested together
+  // - job_id            | STRING           | identifier for the job that writes the FeatureRow to the corresponding BigQuery table
+  //
+  // BigQuery table created will be partitioned by the field "event_timestamp"
+  // of the FeatureRow (https://cloud.google.com/bigquery/docs/partitioned-tables).
+  //
+  // The following table shows how ValueType in Feast is mapped to
+  // BigQuery Standard SQL data types
+  // (https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types):
+  //
+  // BYTES       : BYTES
+  // STRING      : STRING
+  // INT32       : INT64
+  // INT64       : IN64
+  // DOUBLE      : FLOAT64
+  // FLOAT       : FLOAT64
+  // BOOL        : BOOL
+  // BYTES_LIST  : ARRAY
+  // STRING_LIST : ARRAY
+  // INT32_LIST  : ARRAY
+  // INT64_LIST  : ARRAY
+  // DOUBLE_LIST : ARRAY
+  // FLOAT_LIST  : ARRAY
+  // BOOL_LIST   : ARRAY
+  //
+  // The column mode in BigQuery is set to "Nullable" such that unset Value
+  // in a FeatureRow corresponds to NULL value in BigQuery.
+  BIGQUERY = 2,
+
+  // Unsupported in Feast 0.3
+  CASSANDRA = 3,
+
+  REDIS_CLUSTER = 4
+}
+
+export enum UpdateStoreStatus {
+
+  // Existing store config matching the given store id is identical to the given store config.
+  NO_CHANGE = 0,
+
+  // New store created or existing config updated.
+  UPDATED = 1
+}

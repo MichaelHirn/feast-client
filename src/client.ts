@@ -1,9 +1,11 @@
+/* eslint-disable max-lines */
 import * as grpc from '@grpc/grpc-js'
 import * as util from 'util'
+import { FeatureSetMapper, StoreMapper } from './mappers'
 import { ApplyFeatureSetResponseStatus } from './types'
 import { Feature } from './feature'
 import { FeatureSet } from './featureSet'
-import { FeatureSetMapper } from './mappers'
+import { Store } from './store'
 import { loadClientSync } from './utils'
 
 export interface ClientConfig {
@@ -186,7 +188,10 @@ export class Client {
         featureSetName: featureSetName
       }
     })
-    return response.featureSets.map(featureSet => FeatureSet.fromFeast(featureSet))
+    if (response.featureSets instanceof Array) {
+      return response.featureSets.map(featureSet => FeatureSet.fromFeast(featureSet))
+    }
+    return []
   }
 
   /**
@@ -293,5 +298,41 @@ export class Client {
       })
     }
     return []
+  }
+
+  /**
+   * Retrieve store details given a filter.
+   *
+   * @remarks
+   *
+   * Returns all stores matching that filter. If none are found, an empty list will be returned.
+   * If no filter is provided in the request, the response will contain all the stores currently
+   * stored in the registry.
+   *
+   * @param   storeName - Name of desired store. Regex is not supported in this query. Optional.
+   */
+  public async listStores (storeName?: string): Promise<ReturnType<typeof StoreMapper['fromListStoresResponse']>> {
+    const handler = util.promisify((this.coreStub as any).listStores.bind(this.coreStub))
+    const response = await handler({
+      filter: {
+        name: storeName
+      }
+    })
+    return StoreMapper.fromListStoresResponse(response)
+  }
+
+  /**
+   * Updates the store with the provided store configuration.
+   *
+   * @remarks
+   *
+   * If the changes are valid, core will return the given store configuration in response, and
+   * start or update the necessary feature population jobs for the updated store.
+   *
+   */
+  public async updateStore (store: Store): Promise<ReturnType<typeof StoreMapper['fromUpdateStoreResponse']>> {
+    const handler = util.promisify((this.coreStub as any).updateStore.bind(this.coreStub))
+    const response = await handler({ store })
+    return StoreMapper.fromUpdateStoreResponse(response)
   }
 }
