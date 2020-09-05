@@ -74,6 +74,5 @@ For more see the [examples](./examples) directory.
 
 - Implement Authentication and Authorization features
 - Implement support for tags (aka. labels)
-- Implement `Store` features
 - Implement `Statistics` features
 - Implement `.ingest` feature
