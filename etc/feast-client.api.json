@@ -16,6 +16,816 @@
       "name": "",
       "members": [
         {
+          "kind": "Class",
+          "canonicalReference": "feast-client!FeatureRow:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class FeatureRow "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "FeatureRow",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow#eventTimestamp:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "eventTimestamp(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "number"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "eventTimestamp"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow#featureSetRef:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "featureSetRef(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureSetRef",
+                  "canonicalReference": "feast-client!FeatureSetRef:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "featureSetRef"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow#fields:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "fields(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IFeatureRowProps",
+                  "canonicalReference": "feast-client!IFeatureRowProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "['fields']"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 3
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "fields"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow.fromConfig:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static fromConfig(config: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IFeatureRowConfig",
+                  "canonicalReference": "feast-client!IFeatureRowConfig:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "FeatureRow",
+                  "canonicalReference": "feast-client!FeatureRow:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "config",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "fromConfig"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow#ingestionId:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "ingestionId(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | undefined"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "ingestionId"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "feast-client!FeatureRow#props:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected props: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IFeatureRowProps",
+                  "canonicalReference": "feast-client!IFeatureRowProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "props",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!FeatureRow#setIngestionId:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "setIngestionId(ingestionId: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "void"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "ingestionId",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "setIngestionId"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "feast-client!KafkaSource:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class KafkaSource extends "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourceAbstract",
+              "canonicalReference": "feast-client!SourceAbstract:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "IKafkaSourceConfig",
+              "canonicalReference": "feast-client!IKafkaSourceConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "KafkaSource",
+          "members": [
+            {
+              "kind": "Property",
+              "canonicalReference": "feast-client!KafkaSource#_kafkaClient:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected _kafkaClient: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Kafka",
+                  "canonicalReference": "kafkajs!Kafka:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "_kafkaClient",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!KafkaSource#brokers:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "brokers(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "brokers"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!KafkaSource.fromFeast:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static fromFeast(response: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "KafkaSource",
+                  "canonicalReference": "feast-client!KafkaSource:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "response",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "fromFeast"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!KafkaSource#kafkaClient:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "kafkaClient(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Kafka",
+                  "canonicalReference": "kafkajs!Kafka:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "kafkaClient"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!KafkaSource#send:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "send(messages: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any[]"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Promise",
+                  "canonicalReference": "!Promise:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": "<void>"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 5
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "messages",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "send"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!KafkaSource#topic:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "topic(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "topic"
+            }
+          ],
+          "extendsTokenRange": {
+            "startIndex": 1,
+            "endIndex": 5
+          },
+          "implementsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "feast-client!Source:var",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "Source: "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    fromFeast(response: any): "
+            },
+            {
+              "kind": "Reference",
+              "text": "SourceAbstract",
+              "canonicalReference": "feast-client!SourceAbstract:class"
+            },
+            {
+              "kind": "Content",
+              "text": "<any>;\n}"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Source",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Class",
+          "canonicalReference": "feast-client!Store:class",
+          "docComment": "",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare class Store "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "Store",
+          "members": [
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store.fromFeast:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "static fromFeast(response: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "any"
+                },
+                {
+                  "kind": "Content",
+                  "text": "): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "Store",
+                  "canonicalReference": "feast-client!Store:class"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": true,
+              "returnTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [
+                {
+                  "parameterName": "response",
+                  "parameterTypeTokenRange": {
+                    "startIndex": 1,
+                    "endIndex": 2
+                  }
+                }
+              ],
+              "name": "fromFeast"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#isBigQuery:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isBigQuery(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isBigQuery"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#isCassandra:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isCassandra(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isCassandra"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#isInvalid:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isInvalid(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isInvalid"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#isRedis:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isRedis(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isRedis"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#isRedisCluster:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "isRedisCluster(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "isRedisCluster"
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#name:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "name(): "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "name"
+            },
+            {
+              "kind": "Property",
+              "canonicalReference": "feast-client!Store#props:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "protected readonly props: "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "IStoreProps",
+                  "canonicalReference": "feast-client!IStoreProps:interface"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "releaseTag": "Public",
+              "name": "props",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isStatic": false
+            },
+            {
+              "kind": "Method",
+              "canonicalReference": "feast-client!Store#type:member(1)",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "type(): "
+                },
+                {
+                  "kind": "Reference",
+                  "text": "StoreType",
+                  "canonicalReference": "feast-client!StoreType:enum"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isStatic": false,
+              "returnTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "releaseTag": "Public",
+              "overloadIndex": 1,
+              "parameters": [],
+              "name": "type"
+            }
+          ],
+          "implementsTokenRanges": []
+        },
+        {
           "kind": "Enum",
           "canonicalReference": "feast-client!ValueType:enum",
           "docComment": "/**\n * Feature and Entity value type. Used to define data types in Feature Sets.\n *\n * @remarks\n *\n * To learn more: https://github.com/feast-dev/feast/blob/master/sdk/python/feast/value_type.py\n *\n * @public\n */\n",

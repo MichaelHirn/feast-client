@@ -5,6 +5,7 @@
 ```ts
 
 import * as grpc from '@grpc/grpc-js';
+import { Kafka } from 'kafkajs';
 
 // @alpha
 export class Client {
@@ -28,6 +29,7 @@ export class Client {
     //
     // @beta
     getFeatureSet(projectName: string, featureSetName: string): Promise<FeatureSet>;
+    ingest(projectName: string, featureSetName: string, featureRows: FeatureRow[]): Promise<void>;
     listFeatures(projectName: string, entityNames: string[]): Promise<Array<{
         feature: Feature;
         project: string;
@@ -36,8 +38,11 @@ export class Client {
     listFeatureSets(projectName: string, featureSetName?: string): Promise<FeatureSet[]>;
     // @public
     listProjects(): Promise<string[]>;
+    // Warning: (ae-forgotten-export) The symbol "StoreMapper" needs to be exported by the entry point index.d.ts
+    listStores(storeName?: string): Promise<ReturnType<typeof StoreMapper['fromListStoresResponse']>>;
     // (undocumented)
     protected readonly servingStub: grpc.Client;
+    updateStore(store: Store): Promise<ReturnType<typeof StoreMapper['fromUpdateStoreResponse']>>;
 }
 
 // Warning: (ae-forgotten-export) The symbol "Field" needs to be exported by the entry point index.d.ts
@@ -61,6 +66,30 @@ export class Feature extends Field<IFeatureProps> {
     static fromFeast(object: any): Feature;
 }
 
+// @public (undocumented)
+export class FeatureRow {
+    // (undocumented)
+    eventTimestamp(): number;
+    // Warning: (ae-forgotten-export) The symbol "FeatureSetRef" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    featureSetRef(): FeatureSetRef;
+    // (undocumented)
+    fields(): IFeatureRowProps['fields'];
+    // Warning: (ae-forgotten-export) The symbol "IFeatureRowConfig" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    static fromConfig(config: IFeatureRowConfig): FeatureRow;
+    // (undocumented)
+    ingestionId(): string | undefined;
+    // Warning: (ae-forgotten-export) The symbol "IFeatureRowProps" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected props: IFeatureRowProps;
+    // (undocumented)
+    setIngestionId(ingestionId: string): void;
+}
+
 // @alpha
 export class FeatureSet {
     // (undocumented)
@@ -74,6 +103,16 @@ export class FeatureSet {
     // (undocumented)
     static fromFeast(response: any): FeatureSet;
     // (undocumented)
+    hasUnknownStatus(): boolean;
+    // (undocumented)
+    isInvalid(): boolean;
+    // (undocumented)
+    isJobStarting(): boolean;
+    // (undocumented)
+    isPending(): boolean;
+    // (undocumented)
+    isReady(): boolean;
+    // (undocumented)
     name(): IFeatureSetProps['spec']['name'];
     // (undocumented)
     project(): IFeatureSetProps['spec']['project'];
@@ -81,6 +120,63 @@ export class FeatureSet {
     //
     // (undocumented)
     protected readonly props: IFeatureSetProps;
+    // Warning: (ae-forgotten-export) The symbol "SourceAbstract" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    source(): SourceAbstract<any>;
+    // Warning: (ae-forgotten-export) The symbol "FeatureSetStatus" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    status(): FeatureSetStatus | 'UNKNOWN';
+}
+
+// Warning: (ae-forgotten-export) The symbol "IKafkaSourceConfig" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export class KafkaSource extends SourceAbstract<IKafkaSourceConfig> {
+    // (undocumented)
+    brokers(): string[];
+    // (undocumented)
+    static fromFeast(response: any): KafkaSource;
+    // (undocumented)
+    kafkaClient(): Kafka;
+    // (undocumented)
+    protected _kafkaClient: Kafka;
+    // (undocumented)
+    send(messages: any[]): Promise<void>;
+    // (undocumented)
+    topic(): string;
+}
+
+// @public (undocumented)
+export const Source: {
+    fromFeast(response: any): SourceAbstract<any>;
+};
+
+// @public (undocumented)
+export class Store {
+    // (undocumented)
+    static fromFeast(response: any): Store;
+    // (undocumented)
+    isBigQuery(): boolean;
+    // (undocumented)
+    isCassandra(): boolean;
+    // (undocumented)
+    isInvalid(): boolean;
+    // (undocumented)
+    isRedis(): boolean;
+    // (undocumented)
+    isRedisCluster(): boolean;
+    // (undocumented)
+    name(): string;
+    // Warning: (ae-forgotten-export) The symbol "IStoreProps" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    protected readonly props: IStoreProps;
+    // Warning: (ae-forgotten-export) The symbol "StoreType" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    type(): StoreType;
 }
 
 // @public
@@ -120,7 +216,7 @@ export enum ValueType {
 
 // Warnings were encountered during analysis:
 //
-// src/client.ts:225:52 - (ae-forgotten-export) The symbol "ApplyFeatureSetResponseStatus" needs to be exported by the entry point index.d.ts
+// src/client.ts:231:52 - (ae-forgotten-export) The symbol "ApplyFeatureSetResponseStatus" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

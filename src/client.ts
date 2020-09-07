@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 import * as grpc from '@grpc/grpc-js'
 import * as util from 'util'
-import { FeatureSetMapper, StoreMapper } from './mappers'
 import { ApplyFeatureSetResponseStatus } from './types'
+import { FeatureSetMapper, StoreMapper } from './mappers'
 import { Feature } from './feature'
 import { FeatureSet } from './featureSet'
+import { FeatureRow } from './featureRow'
 import { Store } from './store'
 import { loadClientSync } from './utils'
 
@@ -298,6 +299,33 @@ export class Client {
       })
     }
     return []
+  }
+
+  /**
+   * Loads feature data into Feast for a specific feature set.
+   *
+   * @param   projectName - the name of a previously created Project.
+   * @param   featureSetName - the name of a previously created FeatureSet. The FeatureSet
+   *          must belong to the specified Project or will be unable to resolve the FeatureSet.
+   */
+  public async ingest (
+    projectName: string,
+    featureSetName: string,
+    featureRows: FeatureRow[]
+  ): Promise<void> {
+    const featureSet = await this.getFeatureSet(projectName, featureSetName)
+    if (!(featureSet instanceof FeatureSet)) {
+      throw new Error(
+        `unable to resolve feature set "${featureSetName}" for project "${projectName}". Make sure it exists.`
+      )
+    }
+    if (!featureSet.isReady()) {
+      throw new Error(
+        `feature set "${featureSetName}" is not ready yet. current status is ${featureSet.status()}. Try again later.`
+      )
+    }
+    await featureSet
+    console.log(JSON.stringify(featureSet, null, 2))
   }
 
   /**

@@ -2,6 +2,7 @@ import { Entity } from './entity'
 import { Feature } from './feature'
 import { FeatureSetStatus } from './types'
 import { Source } from './source'
+import { SourceAbstract } from './sourceAbstract'
 
 export interface IFeatureSetConstructorParams {
 
@@ -28,7 +29,7 @@ export interface IFeatureSetConstructorParams {
   /**
    * See {@link IFeatureSetProps.spec.source}
    */
-  source?: Source
+  source?: SourceAbstract<any>
 
   /**
    * See {@link IFeatureSetProps.spec.labels}
@@ -69,7 +70,7 @@ export interface IFeatureSetProps {
 
     // Optional. Source on which feature rows can be found.
     // If not set, source will be set to the default value configured in Feast Core.
-    source?: Source
+    source?: SourceAbstract<any>
 
     // User defined metadata
     labels?: { [key: string]: string }
@@ -128,6 +129,37 @@ export class FeatureSet {
     return this.props.spec.features
   }
 
+  public source (): SourceAbstract<any> {
+    return this.props.spec.source
+  }
+
+  public status (): FeatureSetStatus | 'UNKNOWN' {
+    if (this.props.meta instanceof Object) {
+      return this.props.meta.status
+    }
+    return 'UNKNOWN'
+  }
+
+  public isInvalid (): boolean {
+    return this.status() === 'STATUS_INVALID' as unknown as FeatureSetStatus
+  }
+
+  public isPending (): boolean {
+    return this.status() === 'STATUS_PENDING' as unknown as FeatureSetStatus
+  }
+
+  public isReady (): boolean {
+    return this.status() === 'STATUS_READY' as unknown as FeatureSetStatus
+  }
+
+  public isJobStarting (): boolean {
+    return this.status() === 'STATUS_JOB_STARTING' as unknown as FeatureSetStatus
+  }
+
+  public hasUnknownStatus (): boolean {
+    return this.status() === 'UNKNOWN'
+  }
+
   public static fromConfig (name: IFeatureSetProps['spec']['name'], params: IFeatureSetConstructorParams): FeatureSet {
     const props = {
       spec: {
@@ -146,6 +178,12 @@ export class FeatureSet {
   public static fromFeast (response: any): FeatureSet {
     if (response.spec instanceof Object) {
       response.spec.entities = response.spec.entities.map(object => Entity.fromFeast(object))
+      if (response.spec.features instanceof Array) {
+        response.spec.features = response.spec.features.map(object => Feature.fromFeast(object))
+      }
+      if (response.spec.source instanceof Object) {
+        response.spec.source = Source.fromFeast(response.spec.source)
+      }
     }
     if (response.meta instanceof Object) {
       response.meta.createdTimestamp = response.meta.createdTimestamp?.seconds?.low
