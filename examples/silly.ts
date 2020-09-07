@@ -7,6 +7,7 @@ const main = async (): Promise<void> => {
   } catch (err) {
     console.log(err.message)
   }
+  /* eslint-disable-next-line @typescript-eslint/restrict-template-expressions */
   console.log(`Project: ${await coreClient.listProjects()}`)
   console.log(`Stores: ${JSON.stringify(await coreClient.listStores(), null, 2)}`)
   const featureSets = await coreClient.listFeatureSets('test')
