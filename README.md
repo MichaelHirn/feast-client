@@ -15,18 +15,19 @@ npm install feast-client --save
 ### TypeScript
 
 ```typescript
-import { Client, Entity, Feature, FeatureSet, ValueType } from 'feast-client'
+import * as feast from 'feast-client'
 
 // instantiate a Feast Client
-const feastClient = new Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+const feastClient = new feast.Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+
 // create a new Feast project
 await feastClient.createProject('example-project')
 
-// create a new Feast FeatureSet
-const entity = Entity.fromConfig('customerId', ValueType.STRING)
-const orderValue = Feature.fromConfig('orderValueInUSDCents', ValueType.INT32)
-const ageOfCustomer = Feature.fromConfig('ageOfCustomerInYears', ValueType.INT32)
-const featureSet = FeatureSet.fromConfig('example-feature-set', {
+  // create a new Feast FeatureSet
+const entity = feast.Entity.fromConfig('customerId', feast.ValueType.STRING)
+const orderValue = feast.Feature.fromConfig('orderValueInUSDCents', feast.ValueType.INT32)
+const ageOfCustomer = feast.Feature.fromConfig('ageOfCustomerInYears', feast.ValueType.INT32)
+const featureSet = feast.FeatureSet.fromConfig('example-feature-set', {
   project: 'example-project',
   entities: [entity],
   features: [orderValue, ageOfCustomer]
@@ -34,23 +35,37 @@ const featureSet = FeatureSet.fromConfig('example-feature-set', {
 
 // register the FeatureSet with Feast
 await feastClient.applyFeatureSet(featureSet)
+
+// create a feature row ...
+const featureRow = feast.FeatureRow.fromConfig({
+  fields: {
+    orderValueInUSDCents: 995,
+    ageOfCustomerInYears: 30
+  },
+  eventTimestamp: Date.now(),
+  featureSet: 'example-project/example-feature-set'
+})
+
+// ... and submit to the server
+const ingestionId = await feastClient.ingest('example-project', 'example-feature-set', [featureRow])
 ```
 
 ### JavaScript
 
 ```javascript
-const { Client, Entity, Feature, FeatureSet, ValueType } = require('feast-client')
+const feast = require('feast-client')
 
 // instantiate a Feast Client
-const feastClient = new Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+const feastClient = new feast.Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+
 // create a new Feast project
 await feastClient.createProject('example-project')
 
 // create a new Feast FeatureSet
-const entity = Entity.fromConfig('customerId', ValueType.STRING)
-const orderValue = Feature.fromConfig('orderValueInUSDCents', ValueType.INT32)
-const ageOfCustomer = Feature.fromConfig('ageOfCustomerInYears', ValueType.INT32)
-const featureSet = FeatureSet.fromConfig('example-feature-set', {
+const entity = feast.Entity.fromConfig('customerId', ValueType.STRING)
+const orderValue = feast.Feature.fromConfig('orderValueInUSDCents', ValueType.INT32)
+const ageOfCustomer = feast.Feature.fromConfig('ageOfCustomerInYears', ValueType.INT32)
+const featureSet = feast.FeatureSet.fromConfig('example-feature-set', {
   project: 'example-project',
   entities: [entity],
   features: [orderValue, ageOfCustomer]
@@ -58,6 +73,19 @@ const featureSet = FeatureSet.fromConfig('example-feature-set', {
 
 // register the FeatureSet with Feast
 await feastClient.applyFeatureSet(featureSet)
+
+// create a feature row ...
+const featureRow = feast.FeatureRow.fromConfig({
+  fields: {
+    orderValueInUSDCents: 995,
+    ageOfCustomerInYears: 30
+  },
+  eventTimestamp: Date.now(),
+  featureSet: 'example-project/example-feature-set'
+})
+
+// ... and submit to the server
+const ingestionId = await feastClient.ingest('example-project', 'example-feature-set', [featureRow])
 ```
 
 For more see the [examples](./examples) directory.
@@ -75,4 +103,3 @@ For more see the [examples](./examples) directory.
 - Implement Authentication and Authorization features
 - Implement support for tags (aka. labels)
 - Implement `Statistics` features
-- Implement `.ingest` feature
