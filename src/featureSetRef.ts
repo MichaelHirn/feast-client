@@ -26,6 +26,10 @@ export class FeatureSetRef {
     return this.props.featureSet
   }
 
+  public id (): string {
+    return `${this.project()}/${this.featureSet()}`
+  }
+
   /**
    * Construct a FeatureSetRef from string.
    *

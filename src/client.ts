@@ -305,17 +305,24 @@ export class Client {
   /**
    * Loads feature data into Feast for a specific feature set.
    *
-   * @param   projectName - the name of a previously created Project.
-   * @param   featureSetName - the name of a previously created FeatureSet. The FeatureSet
-   *          must belong to the specified Project or will be unable to resolve the FeatureSet.
-   *
    * @returns the UUID associated with this ingestion job - aka. the 'Ingestion ID'.
    */
   public async ingest (
-    projectName: string,
-    featureSetName: string,
     featureRows: FeatureRow[]
   ): Promise<string> {
+    if (!(featureRows instanceof Array)) {
+      throw new Error('invalid feature rows: expected an array')
+    }
+    if (!featureRows.every(row => row instanceof FeatureRow)) {
+      throw new Error('invalid feature rows: expected an array of FeatureRows')
+    }
+    if (!featureRows.every(row => row.featureSetRef().id() === featureRows[0].featureSetRef().id())) {
+      throw new Error('invalid feature rows: expected all FeatureRows to have the same feature set reference')
+    }
+
+    const projectName = featureRows[0].featureSetRef().project()
+    const featureSetName = featureRows[0].featureSetRef().featureSet()
+
     const featureSet = await this.getFeatureSet(projectName, featureSetName)
     if (!(featureSet instanceof FeatureSet)) {
       throw new Error(

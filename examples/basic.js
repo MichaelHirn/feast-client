@@ -38,7 +38,7 @@ const main = async () => {
 
   // ... and submit to the server
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  const ingestionId = await feastClient.ingest('example-project', 'example-feature-set', [featureRow])
+  const ingestionId = await feastClient.ingest([featureRow])
 }
 
 main()

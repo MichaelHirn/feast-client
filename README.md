@@ -47,7 +47,7 @@ const featureRow = feast.FeatureRow.fromConfig({
 })
 
 // ... and submit to the server
-const ingestionId = await feastClient.ingest('example-project', 'example-feature-set', [featureRow])
+const ingestionId = await feastClient.ingest([featureRow])
 ```
 
 ### JavaScript
@@ -85,7 +85,7 @@ const featureRow = feast.FeatureRow.fromConfig({
 })
 
 // ... and submit to the server
-const ingestionId = await feastClient.ingest('example-project', 'example-feature-set', [featureRow])
+const ingestionId = await feastClient.ingest([featureRow])
 ```
 
 For more see the [examples](./examples) directory.

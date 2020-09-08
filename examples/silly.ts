@@ -25,7 +25,7 @@ const main = async (): Promise<void> => {
     entities: [entity],
     features: [orderValue, ageOfCustomer]
   })
-  //await coreClient.applyFeatureSet(featureSet)
+  await coreClient.applyFeatureSet(featureSet)
 
   const featureRow = feast.FeatureRow.fromConfig({
     fields: {
@@ -35,7 +35,7 @@ const main = async (): Promise<void> => {
     eventTimestamp: 1,
     featureSet: 'test/testSet4'
   })
-  const ingestionId = await coreClient.ingest('test', 'testSet4', [featureRow])
+  const ingestionId = await coreClient.ingest([featureRow])
   console.log(`\nIngestion ID: ${ingestionId}`)
 }
 
