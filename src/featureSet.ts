@@ -160,6 +160,10 @@ export class FeatureSet {
     return this.status() === 'UNKNOWN'
   }
 
+  public version (): number {
+    return this.props.spec.version
+  }
+
   public static fromConfig (name: IFeatureSetProps['spec']['name'], params: IFeatureSetConstructorParams): FeatureSet {
     const props = {
       spec: {

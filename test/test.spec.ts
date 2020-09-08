@@ -1,7 +1,8 @@
 import * as feast from '../src'
 import * as fs from 'fs-extra'
 import * as path from 'path'
-import { FeatureRowMapper } from '../src/mappers/featureRowMapper'
+import { FeatureRowMapper, TimestampMapper, ValueMapper } from '../src/mappers'
+import { loadProtoType } from '../src/utils'
 
 describe('FeatureSet', () => {
   test('can construct a FeatureSet with one entity and multiple features', () => {
@@ -73,12 +74,73 @@ describe('FeatureRow', () => {
       fields: [
         {
           name: 'testFeature',
-          value: 100
+          value: {
+            doubleVal: 100
+          }
         }
       ],
-      eventTimestamp: 1,
+      eventTimestamp: {
+        seconds: 0,
+        nanos: 1000000
+      },
       featureSet: 'testProject/testSet',
       ingestionId: 'abc'
     })
+  })
+
+  test('can map a FeatureRow to Protobuf encoding', async () => {
+    const featureRow = feast.FeatureRow.fromConfig({
+      fields: {
+        'testFeature': 100
+      },
+      featureSet: 'testProject/testSet',
+      eventTimestamp: 1,
+      ingestionId: 'abc'
+    })
+    const encoding = FeatureRowMapper.toProtobufEncoding(featureRow, await loadProtoType('FeatureRow'))
+    expect(encoding).toBeInstanceOf(Buffer)
+  })
+})
+
+describe('Timestamp', () => {
+  test('can map between milliseconds and google.protobuf.Timestamp objects', () => {
+    const startTimestamp = 1599551338591
+    const object = TimestampMapper.toGoogleProtobufTimestampObject(startTimestamp)
+    const milliseconds = TimestampMapper.toMilliseconds(object)
+    expect(milliseconds).toBe(startTimestamp)
+  })
+})
+
+describe('Value', () => {
+  test('maps boolean to correct Value object', () => {
+    expect(ValueMapper.toValueObject(true)).toEqual({ boolVal: true })
+  })
+
+  test('maps boolean list to correct Value object', () => {
+    expect(ValueMapper.toValueObject([true])).toEqual({ boolListVal: [true] })
+  })
+
+  test('maps string to correct Value object', () => {
+    expect(ValueMapper.toValueObject('string')).toEqual({ stringVal: 'string' })
+  })
+
+  test('maps string list to correct Value object', () => {
+    expect(ValueMapper.toValueObject(['string'])).toEqual({ stringListVal: ['string'] })
+  })
+
+  test('maps integer to correct Value object', () => {
+    expect(ValueMapper.toValueObject(123)).toEqual({ doubleVal: 123 })
+  })
+
+  test('maps integer list to correct Value object', () => {
+    expect(ValueMapper.toValueObject([123])).toEqual({ doubleListVal: [123] })
+  })
+
+  test('maps float to correct Value object', () => {
+    expect(ValueMapper.toValueObject(1.23)).toEqual({ doubleVal: 1.23 })
+  })
+
+  test('maps float list to correct Value object', () => {
+    expect(ValueMapper.toValueObject([1.23])).toEqual({ doubleListVal: [1.23] })
   })
 })

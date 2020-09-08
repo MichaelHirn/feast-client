@@ -1,6 +1,9 @@
+import { FeatureRow } from '../featureRow'
+import { FeatureRowMapper } from '../mappers/featureRowMapper'
 import { Kafka } from 'kafkajs'
 import { SourceAbstract } from '../sourceAbstract'
 import { SourceType } from '../types'
+import { loadProtoType } from '../utils'
 
 export interface IKafkaSourceConfig {
 
@@ -37,13 +40,22 @@ export class KafkaSource extends SourceAbstract<IKafkaSourceConfig> {
     return this._kafkaClient
   }
 
-  public async send (messages: any[]): Promise<void> {
+  public async send (messages: FeatureRow[]): Promise<void> {
     const producer = this.kafkaClient().producer()
-    await producer.connect()
+    // connect to Kafka and load protoType at the same time to speed it up
+    const [protoType] = await Promise.all([
+      loadProtoType('FeatureRow'),
+      producer.connect()
+    ])
     await producer.send({
       topic: this.topic(),
-      messages
+      messages: messages.map(message => {
+        return {
+          value: FeatureRowMapper.toProtobufEncoding(message, protoType)
+        }
+      })
     })
+    await producer.disconnect()
   }
 
   public static fromFeast (response: any): KafkaSource {

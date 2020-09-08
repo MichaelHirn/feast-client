@@ -1,3 +1,4 @@
+import { FeatureRow } from './featureRow'
 import { SourceType } from './types'
 
 export interface ISourceProps<T> {
@@ -32,5 +33,5 @@ export abstract class SourceAbstract<T> {
     return this.type() === 'KAFKA' as unknown as SourceType
   }
 
-  public abstract async send (messages: any[]): Promise<void>
+  public abstract async send (messages: FeatureRow[]): Promise<void>
 }

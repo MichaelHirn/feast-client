@@ -1,2 +1,5 @@
+export { FeatureRowMapper } from './featureRowMapper'
 export { FeatureSetMapper } from './featureSetMapper'
 export { StoreMapper } from './storeMapper'
+export { TimestampMapper } from './timestampMapper'
+export { ValueMapper } from './valueMapper'
