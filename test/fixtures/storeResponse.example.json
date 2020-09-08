@@ -1,0 +1,14 @@
+{
+  "name": "online",
+  "type": 1,
+  "subscriptions": [
+    {
+      "name": "*",
+      "project": "*"
+    }
+  ],
+  "redisConfig": {
+    "host": "redis",
+    "port": 6379
+  }
+}
