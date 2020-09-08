@@ -1,0 +1,7 @@
+{
+  "type": 1,
+  "kafkaSourceConfig": {
+    "bootstrapServers": "kafka:9092,localhost:9094",
+    "topic": "feast-features"
+  }
+}

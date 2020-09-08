@@ -4,9 +4,11 @@ import * as util from 'util'
 import { FeatureSetMapper, StoreMapper } from './mappers'
 import { ApplyFeatureSetResponseStatus } from './types'
 import { Feature } from './feature'
+import { FeatureRow } from './featureRow'
 import { FeatureSet } from './featureSet'
 import { Store } from './store'
 import { loadClientSync } from './utils'
+import { v3 as uuidv3 } from 'uuid'
 
 export interface ClientConfig {
 
@@ -301,6 +303,47 @@ export class Client {
   }
 
   /**
+   * Loads feature data into Feast for a specific feature set.
+   *
+   * @returns the UUID associated with this ingestion job - aka. the 'Ingestion ID'.
+   */
+  public async ingest (
+    featureRows: FeatureRow[]
+  ): Promise<string> {
+    if (!(featureRows instanceof Array)) {
+      throw new Error('invalid feature rows: expected an array')
+    }
+    if (!featureRows.every(row => row instanceof FeatureRow)) {
+      throw new Error('invalid feature rows: expected an array of FeatureRows')
+    }
+    if (!featureRows.every(row => row.featureSetRef().id() === featureRows[0].featureSetRef().id())) {
+      throw new Error('invalid feature rows: expected all FeatureRows to have the same feature set reference')
+    }
+
+    const projectName = featureRows[0].featureSetRef().project()
+    const featureSetName = featureRows[0].featureSetRef().featureSet()
+
+    const featureSet = await this.getFeatureSet(projectName, featureSetName)
+    if (!(featureSet instanceof FeatureSet)) {
+      throw new Error(
+        `unable to resolve feature set "${featureSetName}" for project "${projectName}". Make sure it exists.`
+      )
+    }
+    if (!featureSet.isReady()) {
+      throw new Error(
+        `feature set "${featureSetName}" is not ready yet. current status is ${featureSet.status()}. Try again later.`
+      )
+    }
+    const ingestionId = Client.generateIngestionId(featureSet)
+    // assign ingestion ID to feature rows
+    featureRows.forEach(featureRow => featureRow.setIngestionId(ingestionId))
+
+    await featureSet.source().send(featureRows)
+
+    return ingestionId
+  }
+
+  /**
    * Retrieve store details given a filter.
    *
    * @remarks
@@ -334,5 +377,13 @@ export class Client {
     const handler = util.promisify((this.coreStub as any).updateStore.bind(this.coreStub))
     const response = await handler({ store })
     return StoreMapper.fromUpdateStoreResponse(response)
+  }
+
+  /**
+   * Generates a UUID from a feature set name and current time.
+   */
+  private static generateIngestionId (featureSet: FeatureSet): string {
+    const uuidString = `${featureSet.name()}_${Date.now() as unknown as string}`
+    return uuidv3(uuidString, uuidv3.DNS)
   }
 }

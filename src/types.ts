@@ -128,3 +128,8 @@ export enum UpdateStoreStatus {
   // New store created or existing config updated.
   UPDATED = 1
 }
+
+export enum SourceType {
+  INVALID = 0,
+  KAFKA = 1
+}

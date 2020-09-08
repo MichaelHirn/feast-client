@@ -1,8 +1,9 @@
-import { Client, Entity, Feature, FeatureSet, ValueType } from '../src'
+import * as feast from '../src'
 
 const main = async (): Promise<void> => {
   // instantiate a Feast Client
-  const feastClient = new Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+  const feastClient = new feast.Client({ coreUrl: 'localhost:6565', servingUrl: 'localhost:6566' })
+
   // create a new Feast project
   try {
     await feastClient.createProject('example-project')
@@ -13,10 +14,10 @@ const main = async (): Promise<void> => {
   }
 
   // create a new Feast FeatureSet
-  const entity = Entity.fromConfig('customerId', ValueType.STRING)
-  const orderValue = Feature.fromConfig('orderValueInUSDCents', ValueType.INT32)
-  const ageOfCustomer = Feature.fromConfig('ageOfCustomerInYears', ValueType.INT32)
-  const featureSet = FeatureSet.fromConfig('example-feature-set', {
+  const entity = feast.Entity.fromConfig('customerId', feast.ValueType.STRING)
+  const orderValue = feast.Feature.fromConfig('orderValueInUSDCents', feast.ValueType.INT32)
+  const ageOfCustomer = feast.Feature.fromConfig('ageOfCustomerInYears', feast.ValueType.INT32)
+  const featureSet = feast.FeatureSet.fromConfig('example-feature-set', {
     project: 'example-project',
     entities: [entity],
     features: [orderValue, ageOfCustomer]
@@ -24,6 +25,20 @@ const main = async (): Promise<void> => {
 
   // register the FeatureSet with Feast
   await feastClient.applyFeatureSet(featureSet)
+
+  // create a feature row ...
+  const featureRow = feast.FeatureRow.fromConfig({
+    fields: {
+      orderValueInUSDCents: 995,
+      ageOfCustomerInYears: 30
+    },
+    eventTimestamp: Date.now(),
+    featureSet: 'example-project/example-feature-set'
+  })
+
+  // ... and submit to the server
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  const ingestionId = await feastClient.ingest([featureRow])
 }
 
 /* eslint-disable-next-line @typescript-eslint/no-floating-promises */
