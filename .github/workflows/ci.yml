@@ -36,6 +36,7 @@ jobs:
       env:
         CI: true
     - name: Publish Test Coverage
+      if: github.event_name == 'pull_request'
       uses: romeovs/lcov-reporter-action@v0.2.16
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
