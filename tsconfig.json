@@ -7,6 +7,7 @@
         "removeComments": false,
         "declarationMap": true,
         "preserveConstEnums": true,
+        "experimentalDecorators": true,
         "sourceMap": true,
         "outDir": "./dist"
     },

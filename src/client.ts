@@ -3,6 +3,7 @@ import * as grpc from '@grpc/grpc-js'
 import * as util from 'util'
 import { FeatureSetMapper, StoreMapper } from './mappers'
 import { ApplyFeatureSetResponseStatus } from './types'
+import { Config } from './config'
 import { Feature } from './feature'
 import { FeatureRow } from './featureRow'
 import { FeatureSet } from './featureSet'
@@ -29,17 +30,13 @@ export interface ClientConfig {
 
   /**
    * Use client-side SSL/TLS for Core gRPC API
-   *
-   * @remarks Not yet implemented.
    */
-  coreSecure?: undefined
+  coreSecure?: boolean
 
   /**
    * Use client-side SSL/TLS for Serving gRPC API
-   *
-   * @remarks Not yet implemented.
    */
-  servingSecure?: undefined
+  servingSecure?: boolean
 
   /**
    * Enable authentication and authorization.
@@ -97,19 +94,23 @@ export interface ClientConfig {
  * @alpha
  */
 export class Client {
-  public readonly config: ClientConfig
+  public readonly config: Config
   protected readonly coreStub: grpc.Client
   protected readonly servingStub: grpc.Client
 
-  public constructor (config: ClientConfig) {
-    this.config = config
+  public constructor (config: Config | any) {
+    if (config instanceof Config) {
+      this.config = config
+    } else {
+      this.config = new Config({config: config})
+    }
 
     const CoreClient = loadClientSync('core')
-    this.coreStub = new CoreClient(this.config.coreUrl, grpc.credentials.createInsecure(), {})
+    this.coreStub = this.config.createCoreGRPCClient(CoreClient)
 
     if (typeof this.config.servingUrl !== 'undefined') {
       const ServingClient = loadClientSync('serving')
-      this.servingStub = new ServingClient(this.config.servingUrl, grpc.credentials.createInsecure(), {})
+      this.servingStub = this.config.createServingGRPCClient(ServingClient)
     }
   }
 
