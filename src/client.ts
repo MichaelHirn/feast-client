@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 import * as grpc from '@grpc/grpc-js'
 import * as util from 'util'
-import { Config, IBaseConfig } from './config'
 import { FeatureSetMapper, StoreMapper } from './mappers'
 import { ApplyFeatureSetResponseStatus } from './types'
+import { Config } from './config'
 import { Feature } from './feature'
 import { FeatureRow } from './featureRow'
 import { FeatureSet } from './featureSet'
@@ -98,7 +98,7 @@ export class Client {
   protected readonly coreStub: grpc.Client
   protected readonly servingStub: grpc.Client
 
-  public constructor (config: Config | IBaseConfig) {
+  public constructor (config: Config | any) {
     if (config instanceof Config) {
       this.config = config
     } else {

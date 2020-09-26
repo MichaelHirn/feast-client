@@ -1,7 +1,13 @@
 import * as feast from '../src'
 
 const main = async (): Promise<void> => {
-  const coreClient = new feast.Client({ coreUrl: 'localhost:6565', coreSecure: true })
+  const coreClient = new feast.Client({
+    coreUrl: 'localhost:6565',
+    coreSecure: true,
+    enableAuth: true,
+    authProvider: 'oauth',
+    authToken: 'provide-your-token-here; or use oauthProviderConfig',
+  })
   try {
     await coreClient.createProject('test')
   } catch (err) {
